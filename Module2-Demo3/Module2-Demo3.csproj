@@ -44,7 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Aliment.cs" />
+    <Compile Include="Models\Cereale.cs" />
     <Compile Include="Models\Conserve.cs" />
+    <Compile Include="Models\Emballage.cs" />
     <Compile Include="Models\Fruit.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

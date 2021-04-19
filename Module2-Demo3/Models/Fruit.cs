@@ -13,6 +13,18 @@ namespace Module2_Demo3.Models
             this.RangerDansLeFrigo();
         }
 
+        public override void Fermer()
+        {
+            base.Fermer();
+            Console.WriteLine("Dans le papier");
+        }
+
+        public override void Ouvrir()
+        {
+            base.Ouvrir();
+            Console.WriteLine("Dans le papier");
+        }
+
         private void RangerDansLeFrigo()
         {
             Console.WriteLine("Dans le frigo");

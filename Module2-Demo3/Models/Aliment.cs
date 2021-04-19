@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Module2_Demo3.Models
 {
-    public abstract class Aliment
+    public abstract class Aliment : Emballage
     {
         public DateTime DatePeremption { get; set; }
 
@@ -16,5 +16,15 @@ namespace Module2_Demo3.Models
         }
 
         public abstract void Conserver();
+
+        public virtual void Ouvrir()
+        {
+            Console.WriteLine("Ouvrir l'élément");
+        }
+
+        public virtual void Fermer()
+        {
+            Console.WriteLine("Fermer l'élément");
+        }
     }
 }
