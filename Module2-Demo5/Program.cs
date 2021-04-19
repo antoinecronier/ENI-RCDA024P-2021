@@ -55,6 +55,7 @@ namespace Module2_Demo5
                 builder.Append(item);
             }
             Console.Write(builder.ToString());
+            Console.WriteLine(string.Join(",", list.ToArray()));
 
             Console.ReadLine();
         }
