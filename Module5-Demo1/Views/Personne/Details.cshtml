@@ -1,0 +1,17 @@
+﻿@model Module5_Demo1.Models.Personne
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Personne</h4>
+    <hr />
+    @Html.Partial("_Personne", Model)
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,4 +1,5 @@
 ﻿using Module5_Demo1.Models;
+using Module5_Demo1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,23 +13,13 @@ namespace Module5_Demo1.Controllers
         // GET: Personne
         public ActionResult Index()
         {
-            List<Personne> personnes = new List<Personne>()
-            {
-                new Personne() { Id = 1, Nom = "n1", Prenom = "p1", Age = 50 }
-            };
-
-            for (int i = 2; i < 50; i++)
-            {
-                personnes.Add(new Personne() { Id = i, Nom = "n"+i, Prenom = "p"+i, Age = 3*i%40 });
-            }
-
-            return View(personnes);
+            return View(FakeDb.Instance.Personnes);
         }
 
         // GET: Personne/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(FakeDb.Instance.Personnes.FirstOrDefault(x => x.Id == id));
         }
 
         // GET: Personne/Create
@@ -78,7 +69,7 @@ namespace Module5_Demo1.Controllers
         // GET: Personne/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(FakeDb.Instance.Personnes.FirstOrDefault(x => x.Id == id));
         }
 
         // POST: Personne/Delete/5
@@ -87,7 +78,7 @@ namespace Module5_Demo1.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                FakeDb.Instance.Personnes.Remove(FakeDb.Instance.Personnes.FirstOrDefault(x => x.Id == id));
 
                 return RedirectToAction("Index");
             }
