@@ -2,6 +2,7 @@
 using Module5_Demo1.Utils;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -47,16 +48,28 @@ namespace Module5_Demo1.Controllers
         // GET: Personne/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            PersonneViewModel vm = new PersonneViewModel();
+            vm.Personne = FakeDb.Instance.Personnes.FirstOrDefault(x => x.Id == id);
+            vm.Id = vm.Personne.Id;
+            vm.Age = vm.Personne.Age;
+
+            return View(vm);
         }
 
         // POST: Personne/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, FormCollection collection, PersonneViewModel vm)
         {
+            //Debug.WriteLine(this.HttpContext);
             try
             {
-                // TODO: Add update logic here
+                Personne toUpdate = FakeDb.Instance.Personnes.FirstOrDefault(x => x.Id == id);
+                toUpdate.Nom = vm.Personne.Nom;
+                toUpdate.Prenom = vm.Personne.Prenom;
+                if (vm.Age.HasValue)
+                {
+                    toUpdate.Age = vm.Age.Value;
+                }
 
                 return RedirectToAction("Index");
             }
