@@ -1,10 +1,12 @@
-﻿@model IEnumerable<Module5_Demo1.Models.Personne>
+﻿@using Module5_Demo1.HtmlHelpers
+@model IEnumerable<Module5_Demo1.Models.Personne>
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
+@Html.MyFirstHelper()
 
 <p>
     @Html.ActionLink("Create New", "Create")
