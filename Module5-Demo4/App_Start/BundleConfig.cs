@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Module5_Demo1
+namespace Module5_Demo4
 {
     public class BundleConfig
     {
@@ -12,9 +12,7 @@ namespace Module5_Demo1
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"
-                        //,"~/Scripts/jquery.validate.unobtrusive.min.js"
-                        ));
+                        "~/Scripts/jquery.validate*"));
 
             // Utilisez la version de développement de Modernizr pour le développement et l'apprentissage. Puis, une fois
             // prêt pour la production, utilisez l'outil de génération à l'adresse https://modernizr.com pour sélectionner uniquement les tests dont vous avez besoin.

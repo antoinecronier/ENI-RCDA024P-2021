@@ -31,13 +31,20 @@ namespace Module5_Demo1.Controllers
 
         // POST: Personne/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Personne personne)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    FakeDb.Instance.Personnes.Add(personne);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("key1", "mon message d'erreur");
+                    return View(personne);
+                }
             }
             catch
             {
