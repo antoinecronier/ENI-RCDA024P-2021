@@ -38,31 +38,62 @@ namespace Module5_Tp2.Controllers
         [HttpPost]
         public ActionResult Create(PizzaViewModel vm)
         {
-            try
+            if (this.OtherValidations(ModelState, vm))
             {
-                vm.Pizza.Pate = FakeDb.Instance.Pates.SingleOrDefault(x => x.Id == vm.Pizza.Pate.Id);
-                vm.Pizza.Ingredients = FakeDb.Instance.Ingredients.Where(x => vm.IngredientIds.Contains(x.Id)).ToList();
-
-                if (FakeDb.Instance.Pizzas.Count <= 0)
+                try
                 {
-                    vm.Pizza.Id = 1;
+                    vm.Pizza.Pate = FakeDb.Instance.Pates.SingleOrDefault(x => x.Id == vm.Pizza.Pate.Id);
+                    vm.Pizza.Ingredients = FakeDb.Instance.Ingredients.Where(x => vm.IngredientIds.Contains(x.Id)).ToList();
+
+                    if (FakeDb.Instance.Pizzas.Count <= 0)
+                    {
+                        vm.Pizza.Id = 1;
+                    }
+                    else
+                    {
+                        vm.Pizza.Id = FakeDb.Instance.Pizzas.Max(x => x.Id) + 1;
+                    }
+
+
+                    FakeDb.Instance.Pizzas.Add(vm.Pizza);
+
+                    return RedirectToAction("Index");
                 }
-                else
+                catch
                 {
-                    vm.Pizza.Id = FakeDb.Instance.Pizzas.Max(x => x.Id) + 1;
+                    vm.Ingredients = FakeDb.Instance.Ingredients.Select(x => new SelectListItem() { Text = x.Nom, Value = x.Id.ToString() }).ToList();
+                    vm.Pates = FakeDb.Instance.Pates;
+                    return View(vm);
                 }
-                
-
-                FakeDb.Instance.Pizzas.Add(vm.Pizza);
-
-                return RedirectToAction("Index");
             }
-            catch
+            else
             {
                 vm.Ingredients = FakeDb.Instance.Ingredients.Select(x => new SelectListItem() { Text = x.Nom, Value = x.Id.ToString() }).ToList();
                 vm.Pates = FakeDb.Instance.Pates;
                 return View(vm);
+
             }
+        }
+
+        private bool OtherValidations(ModelStateDictionary modelState, PizzaViewModel vm)
+        {
+            if (FakeDb.Instance.Pizzas.Any(x => x.Nom.Equals(vm.Pizza.Nom) && vm.Pizza.Id != x.Id))
+            {
+                modelState.AddModelError("Pizza.Nom", "Il existe déjà une pizza avec ce nom");
+            }
+            
+            if (FakeDb.Instance.Pizzas.Distinct()
+                .Any(
+                    x => x.Ingredients.Select(y => y.Id).Distinct().OrderBy(z => z)
+                    .SequenceEqual(
+                    vm.IngredientIds.Distinct().OrderBy(z => z)
+                ) 
+                && vm.Pizza.Id != x.Id))
+            {
+                modelState.AddModelError("IngredientIds", "Il existe déjà une pizza avec ces ingrédients");
+            }
+
+            return modelState.IsValid;
         }
 
         // GET: Pizza/Edit/5
@@ -85,17 +116,26 @@ namespace Module5_Tp2.Controllers
         [HttpPost]
         public ActionResult Edit(PizzaViewModel vm)
         {
-            try
+            if (this.OtherValidations(ModelState, vm))
             {
-                Pizza toUpdate = FakeDb.Instance.Pizzas.SingleOrDefault(x => x.Id == vm.Pizza.Id);
+                try
+                {
+                    Pizza toUpdate = FakeDb.Instance.Pizzas.SingleOrDefault(x => x.Id == vm.Pizza.Id);
 
-                toUpdate.Pate = FakeDb.Instance.Pates.SingleOrDefault(x => x.Id == vm.Pizza.Pate.Id);
-                toUpdate.Ingredients = FakeDb.Instance.Ingredients.Where(x => vm.IngredientIds.Contains(x.Id)).ToList();
-                toUpdate.Nom = vm.Pizza.Nom;
+                    toUpdate.Pate = FakeDb.Instance.Pates.SingleOrDefault(x => x.Id == vm.Pizza.Pate.Id);
+                    toUpdate.Ingredients = FakeDb.Instance.Ingredients.Where(x => vm.IngredientIds.Contains(x.Id)).ToList();
+                    toUpdate.Nom = vm.Pizza.Nom;
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    vm.Ingredients = FakeDb.Instance.Ingredients.Select(x => new SelectListItem() { Text = x.Nom, Value = x.Id.ToString() }).ToList();
+                    vm.Pates = FakeDb.Instance.Pates;
+                    return View(vm);
+                }
             }
-            catch
+            else
             {
                 vm.Ingredients = FakeDb.Instance.Ingredients.Select(x => new SelectListItem() { Text = x.Nom, Value = x.Id.ToString() }).ToList();
                 vm.Pates = FakeDb.Instance.Pates;

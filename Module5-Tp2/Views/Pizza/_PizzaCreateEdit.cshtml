@@ -18,6 +18,6 @@
     @Html.LabelFor(model => model.Pizza.Ingredients, htmlAttributes: new { @class = "control-label col-md-2" })
     <div class="col-md-10">
         @Html.ListBoxFor(model => model.IngredientIds, Model.Ingredients, "Selectionner un ou plusieurs ingredient")
-        @Html.ValidationMessageFor(model => model.Pizza.Ingredients, "", new { @class = "text-danger" })
+        @Html.ValidationMessageFor(model => model.IngredientIds, "", new { @class = "text-danger" })
     </div>
 </div>
