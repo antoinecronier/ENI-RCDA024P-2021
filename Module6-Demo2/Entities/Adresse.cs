@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Module6_Demo2.Entities
 {
-    public class Role
+    public class Adresse
     {
         public int Id { get; set; }
         public string Nom { get; set; }
+        public int Numero { get; set; }
     }
 }

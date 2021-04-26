@@ -12,6 +12,7 @@ namespace Module6_Demo2.Databases
     {
         public DbSet<Personne> Personnes { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Adresse> Adresses { get; set; }
 
     }
 }

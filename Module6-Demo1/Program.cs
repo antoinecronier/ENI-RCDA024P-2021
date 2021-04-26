@@ -1,11 +1,11 @@
-﻿using Module6_Demo1.Databases;
+﻿using Module6_Demo2.Databases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Module6_Demo1
+namespace Module6_Demo2
 {
     public class Program
     {
