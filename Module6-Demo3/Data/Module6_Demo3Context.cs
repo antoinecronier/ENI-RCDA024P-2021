@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Module6_Demo3.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
 
@@ -19,6 +21,16 @@ namespace Module6_Demo3.Data
         {
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //System.Data.Entity.ModelConfiguration.Conventions.
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Entity<Album>().Ignore(x => x.NombreDePiste);
+            modelBuilder.Entity<Album>().HasMany(x => x.Pistes).WithRequired();
+            modelBuilder.Entity<Album>().HasMany(x => x.Artistes).WithMany();
+        }
+
         public System.Data.Entity.DbSet<Module6_Demo3.Models.Album> Albums { get; set; }
+        public System.Data.Entity.DbSet<Module6_Demo3.Models.Artiste> Artistes { get; set; }
     }
 }

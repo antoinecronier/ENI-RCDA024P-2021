@@ -12,5 +12,7 @@ namespace Module6_Demo3.Models
         public string Groupe { get; set; }
         public int Annee { get; set; }
         public int NombreDePiste { get; set; }
+        public List<Piste> Pistes { get; set; }
+        public List<Artiste> Artistes { get; set; }
     }
 }
