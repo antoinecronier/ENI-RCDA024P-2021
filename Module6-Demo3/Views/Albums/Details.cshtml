@@ -1,0 +1,50 @@
+﻿@model Module6_Demo3.Models.Album
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Album</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Titre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Groupe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Groupe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Annee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Annee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreDePiste)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NombreDePiste)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

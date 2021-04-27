@@ -1,0 +1,19 @@
+﻿@model Module6_Tp1_BO.Entities.Samourai
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Samourai</h4>
+    <hr />
+   
+    @Html.Partial("_DetailDeleteSamourai", Model)
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
