@@ -19,8 +19,15 @@ namespace Module6_Tp1_ASP.Data
         {
         }
 
-        public System.Data.Entity.DbSet<Module6_Tp1_BO.Entities.Arme> Armes { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Module6_Tp1_BO.Entities.Samourai>().HasOptional(x => x.Arme).WithOptionalPrincipal();
+            modelBuilder.Entity<Module6_Tp1_BO.Entities.Samourai>().HasMany(x => x.ArtMartiaux).WithMany();
+        }
 
+        public System.Data.Entity.DbSet<Module6_Tp1_BO.Entities.Arme> Armes { get; set; }
         public System.Data.Entity.DbSet<Module6_Tp1_BO.Entities.Samourai> Samourais { get; set; }
+        public System.Data.Entity.DbSet<Module6_Tp1_BO.Entities.ArtMartial> ArtMartiaux { get; set; }
     }
 }

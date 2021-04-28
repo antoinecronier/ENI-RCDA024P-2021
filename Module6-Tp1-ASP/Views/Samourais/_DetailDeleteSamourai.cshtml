@@ -33,4 +33,31 @@
 
     </dd>
 
+    <dt>
+        @Html.DisplayNameFor(model => model.ArtMartiaux)
+    </dt>
+
+    <dd>
+        @if (Model.ArtMartiaux != null && Model.ArtMartiaux.Count > 0)
+        {
+            foreach (var item in Model.ArtMartiaux)
+            {
+                @Html.DisplayFor(model => item.Nom)
+                <br />
+            }
+        }
+        else
+        {
+            <div>Aucun art martial</div>
+        }
+
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Potentiel)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Potentiel)
+    </dd>
 </dl>

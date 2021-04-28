@@ -42,7 +42,8 @@ namespace Module6_Tp1_ASP.Controllers
         public ActionResult Create()
         {
             SamouraiViewModel vm = new SamouraiViewModel();
-            vm.Armes = db.Armes.ToList();
+            vm.Armes = db.Armes.Where(x => !db.Samourais.Select(y => y.Arme.Id).Contains(x.Id)).ToList();
+            vm.ArtMartiaux = db.ArtMartiaux.ToList();
             return View(vm);
         }
 
@@ -56,12 +57,19 @@ namespace Module6_Tp1_ASP.Controllers
             if (ModelState.IsValid)
             {
                 vm.Samourai.Arme = db.Armes.Find(vm.ArmeId);
+                
+                if (vm.ArtMartiauxIds != null)
+                {
+                    vm.Samourai.ArtMartiaux = db.ArtMartiaux.Where(x => vm.ArtMartiauxIds.Contains(x.Id)).ToList();
+                }
+                
                 db.Samourais.Add(vm.Samourai);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            vm.Armes = db.Armes.ToList();
+            vm.Armes = db.Armes.Where(x => !db.Samourais.Select(y => y.Arme.Id).Contains(x.Id)).ToList();
+            vm.ArtMartiaux = db.ArtMartiaux.ToList();
             return View(vm);
         }
 
@@ -79,9 +87,11 @@ namespace Module6_Tp1_ASP.Controllers
             }
 
             SamouraiViewModel vm = new SamouraiViewModel();
-            vm.Armes = db.Armes.ToList();
+            vm.Armes = db.Armes.Where(x => !db.Samourais.Where(y => y.Id != id).Select(y => y.Arme.Id).Contains(x.Id)).ToList();
+            vm.ArtMartiaux = db.ArtMartiaux.ToList();
             vm.Samourai = samourai;
             vm.ArmeId = samourai.Arme?.Id;
+            vm.ArtMartiauxIds = samourai.ArtMartiaux.Select(x => x.Id).ToList();
             return View(vm);
         }
 
@@ -94,16 +104,27 @@ namespace Module6_Tp1_ASP.Controllers
         {
             if (ModelState.IsValid)
             {
-                Samourai samourai = db.Samourais.Include(x => x.Arme).SingleOrDefault(x => x.Id == vm.Samourai.Id);
+                Samourai samourai = db.Samourais.Include(x => x.Arme).Include(x => x.ArtMartiaux).SingleOrDefault(x => x.Id == vm.Samourai.Id);
                 samourai.Nom = vm.Samourai.Nom;
                 samourai.Force = vm.Samourai.Force;
                 samourai.Arme = db.Armes.Find(vm.ArmeId);
+
+                if (vm.ArtMartiauxIds != null)
+                {
+                    samourai.ArtMartiaux = db.ArtMartiaux.Where(x => vm.ArtMartiauxIds.Contains(x.Id)).ToList();
+                }
+                else
+                {
+                    samourai.ArtMartiaux = null;
+                }
+                
                 db.Entry(samourai).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            vm.Armes = db.Armes.ToList();
+            vm.Armes = db.Armes.Where(x => !db.Samourais.Where(y => y.Id != vm.Samourai.Id).Select(y => y.Arme.Id).Contains(x.Id)).ToList();
+            vm.ArtMartiaux = db.ArtMartiaux.ToList();
             return View(vm);
         }
 

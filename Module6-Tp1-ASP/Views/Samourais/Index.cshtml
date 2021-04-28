@@ -20,6 +20,12 @@
         <th>
             @Html.DisplayNameFor(model => model.Arme)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArtMartiaux)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Potentiel)
+        </th>
         <th></th>
     </tr>
 
@@ -40,6 +46,23 @@
         {
             <div>Aucune arme</div>
         }
+    </td>
+    <td>
+        @if (item.ArtMartiaux != null && item.ArtMartiaux.Count > 0)
+        {
+            foreach (var subitem in item.ArtMartiaux)
+            {
+                @Html.DisplayFor(model => subitem.Nom)
+                <br />
+            }
+        }
+        else
+        {
+            <div>Aucun art martial</div>
+        }
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Potentiel)
     </td>
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

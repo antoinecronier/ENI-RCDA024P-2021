@@ -127,15 +127,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ArmesController.cs" />
+    <Compile Include="Controllers\ArtMartiauxController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SamouraisController.cs" />
     <Compile Include="Data\Module6_Tp1_ASPContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202104270713575_initial.cs" />
-    <Compile Include="Migrations\202104270713575_initial.Designer.cs">
-      <DependentUpon>202104270713575_initial.cs</DependentUpon>
+    <Compile Include="Migrations\202104281205126_InitialCreate.cs" />
+    <Compile Include="Migrations\202104281205126_InitialCreate.Designer.cs">
+      <DependentUpon>202104281205126_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\SamouraiViewModel.cs" />
@@ -189,6 +190,11 @@
     <Content Include="Views\Samourais\Index.cshtml" />
     <Content Include="Views\Samourais\_CreateEditSamourai.cshtml" />
     <Content Include="Views\Samourais\_DetailDeleteSamourai.cshtml" />
+    <Content Include="Views\ArtMartiaux\Create.cshtml" />
+    <Content Include="Views\ArtMartiaux\Delete.cshtml" />
+    <Content Include="Views\ArtMartiaux\Details.cshtml" />
+    <Content Include="Views\ArtMartiaux\Edit.cshtml" />
+    <Content Include="Views\ArtMartiaux\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -213,8 +219,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202104270713575_initial.resx">
-      <DependentUpon>202104270713575_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202104281205126_InitialCreate.resx">
+      <DependentUpon>202104281205126_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

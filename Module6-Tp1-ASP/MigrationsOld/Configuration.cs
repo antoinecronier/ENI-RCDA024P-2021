@@ -10,7 +10,6 @@ namespace Module6_Tp1_ASP.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "Module6_Tp1_ASP.Data.Module6_Tp1_ASPContext";
         }
 
         protected override void Seed(Module6_Tp1_ASP.Data.Module6_Tp1_ASPContext context)
